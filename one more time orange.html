@@ -11,37 +11,39 @@
 				width: 100%;
 				padding:0px;
 				margin:0px;
-				overflow-y: hidden;
 			}
 
 			body{
 				height: 100%;
-				overflow-x: scroll;
-				overflow-y: hidden;
-				background-color: #EEE;
-				padding:0px;
-				margin:0px;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+				overflow: hidden;
 			}
 
 			#horiWrapper{
-				width: 1600%;
+				position: relative;
+				width: 100%;
 				height: 100%;
 				padding: 0px;
 				margin: 0px;
+				overflow-y: hidden;
+				-webkit-overflow-scrolling: touch;
 			}
 
 			.letterSection{
-				position: relative;
+				top: 0px;
 				font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Helvetica, Arial, Verdana, sans-serif;
 				height: 100%;
-				width: 6.198%;
-				box-sizing: border-box;
-				display: inline-table;
+				width: 100%;
 				padding: 20px;
 				padding-top: 50px;
+				box-sizing: border-box;
 				line-height: 1.65em;
 				color:#345;
-				/*text-align: center;*/
+				vertical-align: bottom;
+				position: absolute;
+				left: 0px;
 			}
 
 			#slideIndi{
@@ -116,23 +118,84 @@
 			}
 
 			.topImg{
-				background-color: #CCC;
 				position: absolute;
 				width: 100%;
 				height: 45%;
 				top: 0px;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
 			}
 
+				#orange{
+					background-image: url("img/orange.jpg");
+				}
+
+				#connect{
+					background-image: url("img/connect.jpg");
+					background-position: bottom;
+				}
+
+				#busStop_Back{
+					background-repeat: no-repeat;
+					background-image: url("img/busStop_Back.jpg");
+					width:200%;
+					background-size: cover;
+					background-position: -90px 100%;
+				}
+
+				#busStop_Front{
+					background-repeat: no-repeat;
+					height: 100%;
+					background-image: url("img/busStop_Front.png");
+					width:100%;
+					background-size: contain;
+					background-position: bottom;
+				}
+
 			.bottomImg{
-				background-color: #CCC;
 				position: absolute;
 				width: 100%;
-				height: 45%;
+				height: 56%;
 				bottom: 10%;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
 			}
+
+				#back{
+					background-image: url("img/back.jpg");
+				}
+
+				#portal{
+					background-image: url("img/portal.jpg");
+				}
 
 
 		</style>
+
+		<script>
+			window.addEventListener("load",function(){
+				var letterSections = document.getElementsByClassName("letterSection");
+
+				//console.log(letterSections);
+
+				for( i = 0; i < letterSections.length; i++){
+					letterSections[i].style.left = 100 * i + "%";
+				}
+
+				var screenWidth = document.body.offsetWidth;
+				var busStop_Back = document.getElementById("busStop_Back");
+
+				document.getElementById("horiWrapper").addEventListener("scroll",function(){
+					if(this.scrollLeft/screenWidth > 2 && this.scrollLeft/screenWidth < 5 ){
+						busStop_Back.style.backgroundPosition = -90 + (this.scrollLeft/screenWidth-2) * 60 + "px 100%";
+					}
+				})
+
+			});
+
+		</script>
 
 	</head>
 
@@ -147,7 +210,7 @@
 			</div>
 
 			<div id="section1" class="letterSection">
-				<div class="topImg"></div>
+				<div class="topImg" id = "orange"></div>
 				<div class="lowerBox">
 					我特别喜欢<span style="color:#FF9900;">Orange</span>这个名字，因为是我取的，我在美国的所有朋友都知道这个名字，你可是很有名的人。如果你来美国玩，我会介绍他们给你。
 				</div>
@@ -155,18 +218,37 @@
 
 			<div class="letterSection">
 				时光飞逝，好像高中还是昨天的事情，然而已经悄悄过去了10多年啦，好在你一直那么好看，还好我也没变成油腻大叔。
-				<div class="bottomImg"></div>
+				<div class="bottomImg" id = "back"></div>
 			</div>
 
-			<div class="letterSection">我花了那么多年才发现我才是得到最多的人，那么年轻的时候就发现了很喜欢的人，我跟她有很多回忆，在她16岁到20多岁最好的年华，我真的很感谢她这么有耐心和温柔地对待我。</div>
+			<div class="letterSection">
+				<div class="topImg" id = "busStop_Back">
+					<div id = "busStop_Front"></div>
+				</div>
+				<div class="lowerBox">
+					我花了那么多年才发现我才是得到最多的人，那么年轻的时候就发现了很喜欢的人，我跟她有很多回忆，在她16岁到20多岁最好的年华，我真的很感谢她这么有耐心和温柔地对待我。
+				</div>
+			</div>
 
-			<div class="letterSection">我也在这些年学到了理解每个人的不同，对自己的自信，释然面对得不到的东西, 和不羡慕别人的拥有。</div>
+			<div class="letterSection">
+				<div class="lowerBox">
+					我也在这些年学到了理解每个人的不同，对自己的自信，释然面对得不到的东西, 和不羡慕别人的拥有。
+				</div>
+			</div>
 
-			<div class="letterSection">我更没有想到现在真正唯一还常常联系的朋友居然是个女孩子，不对，这么可爱一定是男孩子。</div>
+			<div class="letterSection">
+				我更没有想到现在真正唯一还常常联系的朋友居然是个女孩子，不对，这么可爱一定是男孩子。
+				<div class="bottomImg" id = "portal"></div>
+			</div>
 
 			<div class="letterSection">我一直很喜欢史蒂夫乔布斯在斯坦福大学毕业典礼上的演讲，他讲了对人生的三点理解：</div>
 
-			<div class="letterSection">人生好像一串珠子，发生的每件事情就是一颗珠子，穿这串珠子时并不知道每个珠子对人生到底有何意义，但有一天珠子串成项链，原来每一颗珠子都很有意义。</div>
+			<div class="letterSection">
+				<div class="topImg" id = "connect"></div>
+				<div class="lowerBox">
+					人生好像一串珠子，发生的每件事情就是一颗珠子，穿这串珠子时并不知道每个珠子对人生到底有何意义，但有一天珠子串成项链，原来每一颗珠子都很有意义。
+				</div>
+			</div>
 
 			<div class="letterSection">乔布斯30岁的时候被苹果踢出了公司，他觉得自己失去了自己的一切，但他把失败变成了重新开始的动力，开创三维动画鼻祖工作室皮克斯，苹果快要死掉时重新出山，一手将其打造成全世界总价值最高的公司。原因在于他说:<br/><br/><i>”我爱我所做的事业，以前的挫折反而激发了我的创造力。我想这就是爱与失去的关系。”</i></div>
 
@@ -183,7 +265,7 @@
 
 			<div class="letterSection">我觉得我不需要反复提我受到了什么样的打击和拒绝，but I am still in love with you. <br/><br/>仍怀爱意。</div>
 
-			<div class="letterSection">祝你生活顺心，家人幸福。</div>
+			<div class="letterSection">祝你生活顺心，家人幸福。 <br/><br/><span style="color:#FF9900;"> 💝 情人节快乐。</span></div>
 			<div class="letterSection">爱你的, <br/><span style="color: rgb(255,40,20)">Rubin </span><br/><span style="font-size: 12px; color: rgb(255,60,40)">- Rubin其实是红色的意思。</span></div>
 		</div>
 
