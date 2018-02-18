@@ -171,14 +171,47 @@
 					background-image: url("img/portal.jpg");
 				}
 
+			#cover{
+				position: fixed;
+				height: 100%;
+				width:100%;
+				background-color: #112;
+				z-index: 99999999999;
+				top: 0px;
+				left: 0px;
+			}
+
 
 		</style>
 
 		<script>
 			window.addEventListener("load",function(){
-				var letterSections = document.getElementsByClassName("letterSection");
 
-				//console.log(letterSections);
+				var countDown = document.getElementById('countDown');
+
+				function checkTime(){
+
+					var curTime = Math.round((Date.now()/1000)-1518955200);
+
+					//console.log(curTime);
+
+					if( curTime <= 0 ){
+
+						countDown.innerHTML = ( Math.abs(Math.ceil(curTime/3600)).toString().padStart(2, "0") + ":" + Math.abs(Math.ceil((curTime%3600)/60)).toString().padStart(2, "0") + ":" + Math.abs(Math.ceil(curTime%60)).toString().padStart(2, "0") );
+
+						setTimeout(function(){
+							checkTime();
+						},1000);		
+					}
+					else{
+						console.log("yes");
+						var cover = document.getElementById("cover").style.display = "none";
+					}
+				}
+
+				checkTime();
+
+				var letterSections = document.getElementsByClassName("letterSection");
 
 				for( i = 0; i < letterSections.length; i++){
 					letterSections[i].style.left = 100 * i + "%";
@@ -201,6 +234,9 @@
 
 	<body>
 
+		<div id="cover">
+			<p style='font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑"; color:#CCF; text-align: center; font-size: 1.5em'><br/><br/>听说，<br/>小姐姐们晚上<br/>8点不发<span style="color:orange;">好人卡</span><br/><br/>那个时候再回来吧哈哈。<br/><br/>还剩：<span id="countDown" style='color:#FFF;'>99:99:99</span><br/><br/><span style="font-size: 3em;">🕗 👈</span><br/>8点哦。</p>
+		</div>
 
 		<div id="horiWrapper">
 			<div id="section0" class="letterSection"><br/><br/>哈喽 <span style="color:#FF9900;">Orange</span>
